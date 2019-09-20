@@ -81,8 +81,8 @@
 			children = (
 				043F74BE23300F9C00A3B752 /* PokemonExample.json */,
 				043F749E23300F6700A3B752 /* AppDelegate.swift */,
-				043F74A023300F6700A3B752 /* ViewController.swift */,
 				043F74A223300F6700A3B752 /* Main.storyboard */,
+				043F74A023300F6700A3B752 /* ViewController.swift */,
 				043F74A523300F6800A3B752 /* Assets.xcassets */,
 				043F74A723300F6800A3B752 /* LaunchScreen.storyboard */,
 				043F74AA23300F6800A3B752 /* Info.plist */,
