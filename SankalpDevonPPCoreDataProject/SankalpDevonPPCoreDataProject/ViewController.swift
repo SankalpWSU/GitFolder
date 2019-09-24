@@ -23,7 +23,10 @@ class ViewController: UIViewController, ViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    print(CoreDataManager().persistentContainer)
+    let newList = CoreDataManager.shared.getSavedList()
+    for list in newList{
+        toDoList.append(list.item!)
+    }
     // Do any additional setup after loading the view.
     toDoListTableView.dataSource = self
     toDoListTableView.delegate = self
@@ -32,8 +35,11 @@ class ViewController: UIViewController, ViewDelegate {
     func updateValues(with newValues: String?){
     if let editText = newValues {
         toDoList.append(editText)
+        print(CoreDataManager.shared.createNewList(with: newValues!))
+        
         print(toDoList)
         toDoListTableView.reloadData()
+        CoreDataManager.shared.saveList()
     }
   }
     func delValues(at index: Int){
@@ -59,6 +65,7 @@ extension ViewController: UITableViewDelegate{
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     delValues(at: indexPath.row)
+    CoreDataManager.shared.delListItem(at: indexPath.row)
   }
   
 }
