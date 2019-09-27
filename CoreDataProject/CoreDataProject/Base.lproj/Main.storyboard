@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CoreDataProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OVf-Sl-Ntl">
+                                <rect key="frame" x="0.0" y="84" width="414" height="32"/>
+                                <segments>
+                                    <segment title="Any"/>
+                                    <segment title="Program"/>
+                                    <segment title="Misc"/>
+                                    <segment title="Dark"/>
+                                    <segment title="Fav"/>
+                                </segments>
+                                <connections>
+                                    <action selector="categorySegment:" destination="BYZ-38-t0r" eventType="valueChanged" id="Aag-XB-1ys"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BGg-2F-qDi">
+                                <rect key="frame" x="233" y="44" width="161" height="30"/>
+                                <state key="normal" title="Get Joke"/>
+                                <connections>
+                                    <action selector="getJokeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fd9-9x-FFM"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="un7-2f-yoU">
+                                <rect key="frame" x="0.0" y="140" width="414" height="683"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OVf-Sl-Ntl" secondAttribute="trailing" id="GUo-g3-PfR"/>
+                            <constraint firstItem="un7-2f-yoU" firstAttribute="top" secondItem="OVf-Sl-Ntl" secondAttribute="bottom" constant="25" id="IR0-tx-3Eo"/>
+                            <constraint firstItem="un7-2f-yoU" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="10" id="J8N-pd-TGw"/>
+                            <constraint firstItem="un7-2f-yoU" firstAttribute="trailing" secondItem="OVf-Sl-Ntl" secondAttribute="trailing" id="Px3-dA-Cee"/>
+                            <constraint firstItem="OVf-Sl-Ntl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ePr-9w-3ez"/>
+                            <constraint firstItem="BGg-2F-qDi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lOl-a3-rP5"/>
+                            <constraint firstItem="BGg-2F-qDi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="233" id="qau-VV-ta9"/>
+                            <constraint firstItem="OVf-Sl-Ntl" firstAttribute="top" secondItem="BGg-2F-qDi" secondAttribute="bottom" constant="10" id="u2H-Rw-PGO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BGg-2F-qDi" secondAttribute="trailing" constant="20" id="ueD-NL-zBE"/>
+                            <constraint firstItem="un7-2f-yoU" firstAttribute="leading" secondItem="OVf-Sl-Ntl" secondAttribute="leading" id="ugv-tm-7So"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="categorySegment" destination="OVf-Sl-Ntl" id="3ZV-lk-bJN"/>
+                        <outlet property="tableview" destination="un7-2f-yoU" id="9qq-AK-MjH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="101.78571428571428"/>
+        </scene>
+    </scenes>
+</document>
