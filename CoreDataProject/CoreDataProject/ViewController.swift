@@ -10,24 +10,37 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var url: String = "https://sv443.net/jokeapi/category/Programming"
-    
-    var showJoke: Jokes!
-    var rowCount: Int = 1
+    var url: String = "https://sv443.net/jokeapi/category/Any"
+    var categoriedJokes: [Jokes] = []
+    var favJokes: [Jokes] = []
+    var showJoke: [Jokes] = []
+    var fav: Bool = false
     
     @IBOutlet var categorySegment: UISegmentedControl!
     
     @IBAction func categorySegment(_ sender: UISegmentedControl) {
         switch categorySegment.selectedSegmentIndex {
-        case 0: print("first segment")
+        case 0: url = "https://sv443.net/jokeapi/category/Any"
+            print("any joke")
+            sortedJokes(with: "Any")
         
-        case 1: print("second segment")
+        case 1: url = "https://sv443.net/jokeapi/category/Programming"
+            print("programming joke")
+            sortedJokes(with: "Programming")
             
-        case 2: print("third segment")
+        case 2: url = "https://sv443.net/jokeapi/category/Miscellaneous"
+            print("misc joke")
+            sortedJokes(with: "Miscellaneous")
             
-        case 3: print("forth segment")
+        case 3: url = "https://sv443.net/jokeapi/category/Dark"
+            print("dark joke")
+            sortedJokes(with: "Dark")
             
-        case 4: print("fifth segment")
+        case 4: categoriedJokes = favJokes
+            print("fav jokes")
+            DispatchQueue.main.async {
+                self.tableview.reloadData()
+            }
             
         default:
             break
@@ -35,62 +48,119 @@ class ViewController: UIViewController {
     }
     
     @IBAction func getJokeButton(_ sender: UIButton) {
+        print(url)
+        let chosen = categorySegment.selectedSegmentIndex
+        print(chosen)
+        getJokes(from: url) { (showJokes) in
+            DispatchQueue.main.async {
+                if chosen == 0 {
+                    self.sortedJokes(with: "Any")
+                }
+            }
+        }
+        
+        
         
     }
     
     @IBOutlet var tableview: UITableView!
     
-    
-    
-    
     override func viewDidLoad() {
         
         tableview.dataSource = self
+        tableview.delegate = self
         tableview.register(UINib (nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "tableViewCell")
         
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        print("initial load")
+    }
+    
+    // Start of getJokes func
+    func getJokes (from url: String, completed: @escaping ([Jokes]) -> Void){
         guard let url = URL(string: url) else {print("not passing the url"); return }
         print(url)
         URLSession.shared.dataTask(with: url) { (data, _, error) in
-            print(data)
-            print(error)
+
             do {
                 let data = data; let json = try JSONDecoder().decode(Jokes.self, from: data!)
-               // print(json)
-                self.showJoke = json
+                self.showJoke.append(json)
+            
+               print(self.showJoke)
+    
             } catch {
                 print(error)
             }
-            
-            DispatchQueue.main.async {
+                DispatchQueue.main.async {
                 self.tableview.reloadData()
             }
+            completed(self.showJoke)
         }.resume()
-        
-    }
+        print("got the joke")
+    } // end of getJokes func
 
+    // Start of sort func
+    func sortedJokes (with category: String){
+        categoriedJokes.removeAll()
+        for alljokes in showJoke{
+            print(category)
+            if category == "Any"{
+                    self.categoriedJokes.append(alljokes)
+                }
+            else if category == alljokes.category {
+                    self.categoriedJokes.append(alljokes)
+                }
+            }
+        DispatchQueue.main.async {
+            self.tableview.reloadData()
+        }
+        print("sorted joke should display")
+    } // end of sort func
 
 }
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rowCount
+        return categoriedJokes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       //  let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "tableViewCell")
         cell.textLabel?.numberOfLines = 0
-        if showJoke.type == "single" {
-            print("reached point 1")
-            cell.textLabel?.text = "\(showJoke.joke ?? "no joke")"
+      //  print(showJoke.type)
+        if categoriedJokes[indexPath.row].type == "single" {
+            cell.textLabel?.text = categoriedJokes[indexPath.row].joke
         } else {
-            print("reached point 2")
-            cell.textLabel?.text = "\(showJoke.setup ?? "no setup")\n\n\n \(showJoke.delivery)"
-            
+            cell.textLabel?.text = "\(categoriedJokes[indexPath.row].setup ?? "") \n\n \(categoriedJokes[indexPath.row].delivery ?? "")"
         }
         
+        
+        cell.contentView.layer.borderColor = UIColor.black.cgColor
+        cell.contentView.layer.borderWidth = 1
         return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        let favJoke = categoriedJokes[indexPath.row]
+        if !fav{
+        favJokes.append(favJoke)
+            cell?.contentView.backgroundColor = .yellow
+            fav = true
+            print(favJokes)
+        }
+        else if fav{
+            print(indexPath.row)
+                    favJokes.removeAll { (jokeElement) -> Bool in
+                        categoriedJokes[indexPath.row].id == jokeElement.id
+                    }
+            
+            cell?.contentView.backgroundColor = .white
+            fav = false
+        }
     }
 }
