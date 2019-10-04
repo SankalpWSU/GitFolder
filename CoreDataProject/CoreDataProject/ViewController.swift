@@ -21,23 +21,24 @@ class ViewController: UIViewController {
     @IBAction func categorySegment(_ sender: UISegmentedControl) {
         switch categorySegment.selectedSegmentIndex {
         case 0: url = "https://sv443.net/jokeapi/category/Any"
-            print("any joke")
+           // print("any joke")
+            checkFav()
             sortedJokes(with: "Any")
         
         case 1: url = "https://sv443.net/jokeapi/category/Programming"
-            print("programming joke")
+          //  print("programming joke")
             sortedJokes(with: "Programming")
             
         case 2: url = "https://sv443.net/jokeapi/category/Miscellaneous"
-            print("misc joke")
+          //  print("misc joke")
             sortedJokes(with: "Miscellaneous")
             
         case 3: url = "https://sv443.net/jokeapi/category/Dark"
-            print("dark joke")
+          //  print("dark joke")
             sortedJokes(with: "Dark")
             
         case 4: categoriedJokes = favJokes
-            print("fav jokes")
+          //  print("fav jokes")
             DispatchQueue.main.async {
                 self.tableview.reloadData()
             }
@@ -48,9 +49,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func getJokeButton(_ sender: UIButton) {
-        print(url)
+       // print(url)
         let chosen = categorySegment.selectedSegmentIndex
-        print(chosen)
+      //  print(chosen)
         getJokes(from: url) { (showJokes) in
             DispatchQueue.main.async {
                 if chosen == 0 {
@@ -72,6 +73,7 @@ class ViewController: UIViewController {
         tableview.register(UINib (nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "tableViewCell")
         
         super.viewDidLoad()
+        favJokes = CoreDataManager.shared.getSavedJoke()
         
         print("initial load")
     }
@@ -86,7 +88,7 @@ class ViewController: UIViewController {
                 let data = data; let json = try JSONDecoder().decode(Jokes.self, from: data!)
                 self.showJoke.append(json)
             
-               print(self.showJoke)
+          //     print(self.showJoke)
     
             } catch {
                 print(error)
@@ -96,14 +98,14 @@ class ViewController: UIViewController {
             }
             completed(self.showJoke)
         }.resume()
-        print("got the joke")
+     //   print("got the joke")
     } // end of getJokes func
 
     // Start of sort func
     func sortedJokes (with category: String){
         categoriedJokes.removeAll()
         for alljokes in showJoke{
-            print(category)
+        //    print(category)
             if category == "Any"{
                     self.categoriedJokes.append(alljokes)
                 }
@@ -114,9 +116,13 @@ class ViewController: UIViewController {
         DispatchQueue.main.async {
             self.tableview.reloadData()
         }
-        print("sorted joke should display")
+    //    print("sorted joke should display")
     } // end of sort func
 
+    func checkFav() {
+        
+    }
+    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -134,7 +140,11 @@ extension ViewController: UITableViewDataSource {
         } else {
             cell.textLabel?.text = "\(categoriedJokes[indexPath.row].setup ?? "") \n\n \(categoriedJokes[indexPath.row].delivery ?? "")"
         }
-        
+        for favJoke in favJokes {
+            if categoriedJokes[indexPath.row].id == favJoke.id {
+                cell.backgroundColor = .yellow
+            }
+        }
         
         cell.contentView.layer.borderColor = UIColor.black.cgColor
         cell.contentView.layer.borderWidth = 1
@@ -150,6 +160,8 @@ extension ViewController: UITableViewDelegate{
         if !fav{
         favJokes.append(favJoke)
             cell?.contentView.backgroundColor = .yellow
+            CoreDataManager.shared.createJoke(with: favJoke)
+            CoreDataManager.shared.saveFav()
             fav = true
             print(favJokes)
         }

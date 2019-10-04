@@ -31,7 +31,6 @@ public class Jokes: NSManagedObject, Codable {
         setup = try container.decodeIfPresent(String.self, forKey: .setup)
         delivery = try container.decodeIfPresent(String.self, forKey: .delivery)
         id = try (container.decodeIfPresent(Int64.self, forKey: .id) ?? 0)
-        
     }
     
     public func encode(to encoder: Encoder) throws {
