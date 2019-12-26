@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             
             do {
-                let data = data; let json = try JSONDecoder().decode(Dictionary.self, from: data!)
+                let data = data; let json = try JSONDecoder().decode(Hits.self, from: data!)
                 print(json)
             } catch {
                 print(error)

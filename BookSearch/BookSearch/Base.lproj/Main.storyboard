@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MkT-tH-CCs">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BookSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dwk-6w-tl7">
+                                <rect key="frame" x="0.0" y="337" width="414" height="525"/>
+                            </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Search Here" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wRz-9I-30D">
+                                <rect key="frame" x="71" y="143" width="284" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMA-bf-lHZ">
+                                <rect key="frame" x="133" y="243" width="149" height="30"/>
+                                <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="SearchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xoP-Th-qNY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Dwk-6w-tl7" secondAttribute="trailing" id="88g-d8-cyP"/>
+                            <constraint firstItem="Dwk-6w-tl7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BAM-X4-35y"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wRz-9I-30D" secondAttribute="trailing" constant="59" id="GSL-yr-9UE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Dwk-6w-tl7" secondAttribute="bottom" id="aHd-Ud-NJb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vMA-bf-lHZ" secondAttribute="trailing" constant="132" id="kPa-LY-7XP"/>
+                            <constraint firstItem="Dwk-6w-tl7" firstAttribute="top" secondItem="vMA-bf-lHZ" secondAttribute="bottom" constant="64" id="lrI-Pu-kPV"/>
+                            <constraint firstItem="vMA-bf-lHZ" firstAttribute="top" secondItem="wRz-9I-30D" secondAttribute="bottom" constant="66" id="ncx-O0-aba"/>
+                            <constraint firstItem="wRz-9I-30D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="qwk-b5-QCn"/>
+                            <constraint firstItem="vMA-bf-lHZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="133" id="reF-C2-rjO"/>
+                            <constraint firstItem="wRz-9I-30D" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="55" id="sRo-zy-0h6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5KX-8A-Jq1"/>
+                    <connections>
+                        <outlet property="SearchItem" destination="wRz-9I-30D" id="7dy-wf-waR"/>
+                        <outlet property="tableview" destination="Dwk-6w-tl7" id="yT3-IY-7Ak"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="99.776785714285708"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="T1X-ge-zKQ">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" id="Ww7-n3-zDG" customClass="DetailViewController" customModule="BookSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8B4-58-KaF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W00-rr-CQ2">
+                                <rect key="frame" x="20" y="162" width="374" height="573"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="W00-rr-CQ2" firstAttribute="leading" secondItem="17r-FG-dko" secondAttribute="leading" constant="20" id="D3N-Lk-quc"/>
+                            <constraint firstItem="17r-FG-dko" firstAttribute="trailing" secondItem="W00-rr-CQ2" secondAttribute="trailing" constant="20" id="SfZ-06-7B6"/>
+                            <constraint firstItem="W00-rr-CQ2" firstAttribute="top" secondItem="17r-FG-dko" secondAttribute="top" constant="118" id="iBZ-yP-j12"/>
+                            <constraint firstItem="17r-FG-dko" firstAttribute="bottom" secondItem="W00-rr-CQ2" secondAttribute="bottom" constant="127" id="pWz-Sz-0M2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="17r-FG-dko"/>
+                    </view>
+                    <connections>
+                        <outlet property="detailInfo" destination="W00-rr-CQ2" id="KfI-UN-juc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vPl-tS-4ZA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800.0000000000002" y="99.776785714285708"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9zo-o8-0Ge">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MkT-tH-CCs" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hJC-7Q-JRR">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="TlX-82-McS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vHt-bJ-2Az" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="99.776785714285708"/>
+        </scene>
+    </scenes>
+</document>

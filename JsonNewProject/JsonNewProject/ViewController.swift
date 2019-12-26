@@ -49,7 +49,7 @@ class ViewController: UIViewController {
             self.dictionary = json
         //    self.noOFRows = self.dictionaryKeys.count
             
-           // print(self.dictionary)
+           print(self.dictionary)
             // to reload the tableView after we get all the data from the URL
             DispatchQueue.main.async {
                 self.tabelView.reloadData()

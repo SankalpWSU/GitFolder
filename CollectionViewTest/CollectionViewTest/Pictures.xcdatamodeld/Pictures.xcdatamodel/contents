@@ -3,6 +3,7 @@
     <entity name="Hits" representedClassName="Hits" syncable="YES">
         <attribute name="total" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalHits" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="hits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pictures"/>
     </entity>
     <entity name="Pictures" representedClassName="Pictures" syncable="YES">
         <attribute name="comments" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -12,7 +13,7 @@
         <attribute name="views" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
+        <element name="Hits" positionX="-54" positionY="27" width="128" height="88"/>
         <element name="Pictures" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Hits" positionX="-54" positionY="27" width="128" height="73"/>
     </elements>
 </model>
